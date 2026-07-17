@@ -24,14 +24,14 @@ The specifications are solid reference documents, but a reference is not a learn
 
 ## Syllabus
 
-Modules 0 and 1 are written. The rest are listed so the shape is visible; planned titles may shift.
+Modules 0 through 3 are written. The rest are listed so the shape is visible; planned titles may shift.
 
 | Part | # | Module | Status |
 | --- | --- | --- | --- |
 | 0. Orientation | 0 | [Orientation: the map and the conventions](modules/00-orientation.md) | Available |
 | I. The industry | 1 | [The industry: who's who and how the money flows](modules/01-the-industry.md) | Available |
 | I. The industry | 2 | [The hardware: connectors, power, and the physical layer](modules/02-the-hardware.md) | Available |
-| I. The industry | 3 | Standards bodies and regulation | Planned |
+| I. The industry | 3 | [Standards bodies and regulation](modules/03-standards-and-regulation.md) | Available |
 | II. Protocol landscape | 4 | The protocol map: from the EV to the grid | Planned |
 | III. OCPP | 5 | OCPP: history, governance, versions | Planned |
 | III. OCPP | 6 | OCPP-J on the wire: WebSocket, framing, correlation | Planned |

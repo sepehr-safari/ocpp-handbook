@@ -8,6 +8,8 @@ Working definitions, added as modules introduce the terms. Where a specification
 
 **Ad hoc payment.** Paying at the charger without a pre-existing account, typically by bank card or a QR-code web flow. Increasingly required by regulation for new public fast chargers.
 
+**AFIR (Alternative Fuels Infrastructure Regulation).** Regulation (EU) 2023/1804, binding across the EU since 2024. Requires open ad hoc payment, per-kilowatt-hour pricing, and price transparency at public fast chargers, and sets deployment targets along the main transport corridors (the TEN-T network). Module 3.
+
 **Battery management system (BMS).** The system inside the vehicle that governs how much power the battery accepts at each moment and protects it as it fills. The final authority on charging power, sitting above every station, cable, or connector limit.
 
 **Capacity charges.** The part of a commercial electricity bill driven by peak power draw rather than energy consumed; called demand charges in North America. A major cost line for fast-charging sites.
@@ -20,7 +22,11 @@ Working definitions, added as modules introduce the terms. Where a specification
 
 **CHAdeMO.** An early DC fast-charging connector of Japanese origin, kept as a separate port rather than combined with an AC connector, now largely superseded outside Japan.
 
+**ChaoJi.** A next-generation DC fast-charging connector developed from the CHAdeMO lineage with Chinese partners, aimed at a higher-power successor to today's fast-charging connectors. Module 3.
+
 **Charge point.** OCPP 1.6's name for the charging station. In 1.6's model, a charge point contains numbered connectors, and connector 0 means the unit itself.
+
+**CharIN.** The industry alliance behind the Combined Charging System (CCS) and the Megawatt Charging System (MCS), which also runs interoperability test events (testivals). Not a formal standards body, yet a decisive one. Module 3.
 
 **Charging station.** The physical charging hardware; this handbook's default term, matching OCPP 2.0.1. Contains one or more EVSEs.
 
@@ -44,11 +50,15 @@ Working definitions, added as modules introduce the terms. Where a specification
 
 **EV.** Electric vehicle; in this handbook usually a battery-electric car, though the protocols don't much care.
 
+**EVRoaming Foundation.** The organization that stewards OCPI, the CPO-to-eMSP roaming protocol. Module 3.
+
 **EVSE (electric vehicle supply equipment).** Colloquially, the whole charger. Precisely, in OCPP 2.0.1: the part of a charging station that can deliver energy to one EV at a time. A station has one or more EVSEs; an EVSE has one or more connectors, of which one can be active. Module 0 explains why the precision matters.
 
 **GB/T.** China's national EV charging connector standards, with separate AC and DC plugs. The largest connector family by sheer count.
 
 **Idle fee.** A per-minute charge for staying plugged in after charging ends. It protects the only revenue-producing thing on the site: the working connector's time.
+
+**IEC (International Electrotechnical Commission).** The international body for electrotechnical standards, owner of IEC 61851 and IEC 62196 and, jointly with ISO, of ISO 15118. Module 3.
 
 **IEC 61851.** The international standard for the low-level electrical relationship between EV and station: presence, readiness, and permitted current, signaled on the control pilot line. Module 2.
 
@@ -56,17 +66,23 @@ Working definitions, added as modules introduce the terms. Where a specification
 
 **IEEE 2030.5.** A smart-energy protocol for distributed energy resources; one of the grid-facing protocols a CSMS may speak. Module 4.
 
+**ISO (International Organization for Standardization).** The international standards body that, jointly with the IEC, publishes ISO 15118. Module 3.
+
 **ISO 15118.** The standard for high-level digital communication between EV and station: identification, Plug and Charge, and bidirectional power in its newer editions. Module 12.
 
 **MCS (Megawatt Charging System).** An emerging connector standard for charging heavy trucks at megawatt-class power. Module 2.
 
 **NACS (SAE J3400).** The connector originally developed by Tesla, combining AC and DC in one compact plug, now standardized as SAE J3400 and being adopted more widely across North America. Module 2.
 
+**NEVI (National Electric Vehicle Infrastructure).** A US federal program funding corridor charging, whose minimum standards (23 CFR Part 680) require OCPP, ISO 15118 Plug and Charge, CCS1 connectors, and above 97 percent uptime. Subject to policy change since 2025. Module 3.
+
 **OCA (Open Charge Alliance).** The industry alliance that maintains OCPP and OSCP and distributes the specifications free of charge after registration.
 
 **OCPI (Open Charge Point Interface).** The protocol for exchanging locations, tariffs, sessions, CDRs, and tokens between CPOs and eMSPs, peer to peer or via hubs. Maintained by the EVRoaming Foundation.
 
 **OCPP (Open Charge Point Protocol).** The protocol between charging stations and the CSMS; the subject of most of this handbook. Maintained by the OCA.
+
+**OCPP certification.** The Open Charge Alliance program that tests a station or CSMS against a defined OCPP profile using a compliance testing tool and accredited labs. Proves conformance to the profile, not field correctness across vendor pairs. Module 3.
 
 **OCPP-J.** OCPP carried as JSON over WebSocket, as opposed to the legacy SOAP transport. "1.6J" means OCPP 1.6 in this transport.
 
@@ -87,6 +103,8 @@ Working definitions, added as modules introduce the terms. Where a specification
 **Roaming.** The arrangement that lets an eMSP's customers charge on networks they hold no direct contract with, with data and settlement flowing between the parties behind the scenes.
 
 **Roaming hub.** A platform CPOs and eMSPs each connect to once for many-to-many roaming, instead of maintaining bilateral links. Hubject and Gireve are the big ones.
+
+**SAE International.** The standards body behind several North American EV standards, including SAE J1772 (Type 1) and SAE J3400 (NACS). Module 3.
 
 **Site host.** The party that controls the location where stations stand, typically earning rent, a revenue share, or foot traffic.
 

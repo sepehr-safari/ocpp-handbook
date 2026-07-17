@@ -129,4 +129,4 @@ OCPP is the top of this stack and the subject of Part III. It does not deliver e
 
 ---
 
-Previous: [Module 1: The industry](01-the-industry.md) | [Contents](../README.md) | Next: Module 3, Standards bodies and regulation (not yet written)
+Previous: [Module 1: The industry](01-the-industry.md) | [Contents](../README.md) | Next: [Module 3: Standards bodies and regulation](03-standards-and-regulation.md)
