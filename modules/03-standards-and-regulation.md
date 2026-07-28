@@ -85,4 +85,4 @@ You now have the org chart. Part II hands you the architecture. The compact vers
 
 ---
 
-Previous: [Module 2: The hardware](02-the-hardware.md) | [Contents](../README.md) | Next: Module 4, The protocol landscape (not yet written)
+Previous: [Module 2: The hardware](02-the-hardware.md) | [Contents](../README.md) | Next: [Module 4: The protocol map](04-the-protocol-map.md)
