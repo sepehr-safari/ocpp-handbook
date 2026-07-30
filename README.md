@@ -24,7 +24,7 @@ The specifications are solid reference documents, but a reference is not a learn
 
 ## Syllabus
 
-Modules 0 through 4 are written. The rest are listed so the shape is visible; planned titles may shift.
+All modules are available, from orientation through the capstone.
 
 | Part | # | Module | Status |
 | --- | --- | --- | --- |
