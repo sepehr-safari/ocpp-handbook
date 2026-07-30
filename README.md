@@ -37,7 +37,7 @@ Modules 0 through 4 are written. The rest are listed so the shape is visible; pl
 | III. OCPP | 6 | [OCPP-J on the wire: WebSocket, framing, correlation](modules/06-ocpp-j-on-the-wire.md) | Available |
 | III. OCPP | 7 | [The transaction lifecycle](modules/07-the-transaction-lifecycle.md) | Available |
 | III. OCPP | 8 | [CSMS-initiated operations](modules/08-csms-initiated-operations.md) | Available |
-| III. OCPP | 9 | Smart charging | Planned |
+| III. OCPP | 9 | [Smart charging](modules/09-smart-charging.md) | Available |
 | III. OCPP | 10 | Security | Planned |
 | III. OCPP | 11 | OCPP 2.0.1 and beyond | Planned |
 | III. OCPP | 12 | ISO 15118 and Plug and Charge | Planned |
