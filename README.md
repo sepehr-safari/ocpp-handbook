@@ -41,7 +41,7 @@ Modules 0 through 4 are written. The rest are listed so the shape is visible; pl
 | III. OCPP | 10 | [Security](modules/10-security.md) | Available |
 | III. OCPP | 11 | [OCPP 2.0.1 and beyond](modules/11-ocpp-201-and-beyond.md) | Available |
 | III. OCPP | 12 | [ISO 15118 and Plug and Charge](modules/12-iso-15118-and-plug-and-charge.md) | Available |
-| IV. The field | 13 | Why chargers break: failure patterns | Planned |
+| IV. The field | 13 | [Why chargers break: failure patterns](modules/13-why-chargers-break.md) | Available |
 | IV. The field | 14 | Tracing and observability | Planned |
 | IV. The field | 15 | The open-source ecosystem | Planned |
 | V. Mastery | 16 | Reading specifications and tracking the frontier | Planned |
