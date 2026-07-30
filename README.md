@@ -35,7 +35,7 @@ Modules 0 through 4 are written. The rest are listed so the shape is visible; pl
 | II. Protocol landscape | 4 | [The protocol map: from the EV to the grid](modules/04-the-protocol-map.md) | Available |
 | III. OCPP | 5 | [OCPP: history, governance, versions](modules/05-ocpp-overview.md) | Available |
 | III. OCPP | 6 | [OCPP-J on the wire: WebSocket, framing, correlation](modules/06-ocpp-j-on-the-wire.md) | Available |
-| III. OCPP | 7 | The transaction lifecycle | Planned |
+| III. OCPP | 7 | [The transaction lifecycle](modules/07-the-transaction-lifecycle.md) | Available |
 | III. OCPP | 8 | CSMS-initiated operations | Planned |
 | III. OCPP | 9 | Smart charging | Planned |
 | III. OCPP | 10 | Security | Planned |
