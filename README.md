@@ -45,7 +45,7 @@ Modules 0 through 4 are written. The rest are listed so the shape is visible; pl
 | IV. The field | 14 | [Tracing and observability](modules/14-tracing-and-observability.md) | Available |
 | IV. The field | 15 | [The open-source ecosystem](modules/15-the-open-source-ecosystem.md) | Available |
 | V. Mastery | 16 | [Reading specifications and tracking the frontier](modules/16-reading-specifications.md) | Available |
-| V. Mastery | 17 | Capstone: end to end with open tools | Planned |
+| V. Mastery | 17 | [Capstone: end to end with open tools](modules/17-capstone.md) | Available |
 | Appendix | | [Glossary](GLOSSARY.md) | Growing |
 
 ## Scope and conventions
