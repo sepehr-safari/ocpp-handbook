@@ -33,7 +33,7 @@ Modules 0 through 4 are written. The rest are listed so the shape is visible; pl
 | I. The industry | 2 | [The hardware: connectors, power, and the physical layer](modules/02-the-hardware.md) | Available |
 | I. The industry | 3 | [Standards bodies and regulation](modules/03-standards-and-regulation.md) | Available |
 | II. Protocol landscape | 4 | [The protocol map: from the EV to the grid](modules/04-the-protocol-map.md) | Available |
-| III. OCPP | 5 | OCPP: history, governance, versions | Planned |
+| III. OCPP | 5 | [OCPP: history, governance, versions](modules/05-ocpp-overview.md) | Available |
 | III. OCPP | 6 | OCPP-J on the wire: WebSocket, framing, correlation | Planned |
 | III. OCPP | 7 | The transaction lifecycle | Planned |
 | III. OCPP | 8 | CSMS-initiated operations | Planned |
