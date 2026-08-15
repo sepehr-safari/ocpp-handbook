@@ -6,3 +6,7 @@ build/
 ocpp-handbook-*.pdf
 ocpp-handbook-*.epub
 puppeteer.json
+
+# Generated at build time from the modules, so they cannot go stale.
+public/llms.txt
+public/llms-full.txt

@@ -1,5 +1,13 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { descriptions, siteDescription } from '../scripts/descriptions.mjs'
+
+const author = {
+  '@type': 'Person',
+  name: 'Sepehr Safari',
+  url: 'https://github.com/sepehr-safari',
+}
+const license = 'https://creativecommons.org/licenses/by/4.0/'
 
 const modules = (part: string, entries: [string, string][]) => ({
   text: part,
@@ -13,8 +21,7 @@ const hostname = 'https://ocpp-handbook.vercel.app/'
 export default withMermaid(
   defineConfig({
     title: 'OCPP Handbook',
-    description:
-      'A course on EV charging software: the industry, the hardware, the protocols, and the craft of debugging them.',
+    description: siteDescription,
     lang: 'en-US',
     base: '/',
     cleanUrls: true,
@@ -40,15 +47,10 @@ export default withMermaid(
         },
       ],
       ['meta', { property: 'og:type', content: 'website' }],
-      ['meta', { property: 'og:title', content: 'OCPP Handbook' }],
-      [
-        'meta',
-        {
-          property: 'og:description',
-          content:
-            'A course on EV charging software: the industry, the hardware, the protocols, and the craft of debugging them.',
-        },
-      ],
+      ['meta', { property: 'og:site_name', content: 'OCPP Handbook' }],
+      ['meta', { name: 'twitter:card', content: 'summary' }],
+      // og:title, og:description, og:url and the canonical link are set per
+      // page in transformPageData.
     ],
 
     themeConfig: {
@@ -129,16 +131,89 @@ export default withMermaid(
 
     sitemap: { hostname },
 
-    // One canonical URL per page, so the same content served from anywhere else
-    // points search engines back here.
+    // Per-page canonical URL, description, and structured data. Search engines
+    // and AI assistants both work better when each page states plainly what it
+    // is, who wrote it, that it is free to read, and how it may be reused.
     transformPageData(pageData) {
-      const path = pageData.relativePath
+      const slug = pageData.relativePath
         .replace(/(^|\/)index\.md$/, '$1')
         .replace(/\.md$/, '')
+      const url = `${hostname}${slug}`
+      const isHome = slug === ''
+      const description = isHome ? siteDescription : descriptions[slug]
+      const modified = pageData.lastUpdated
+        ? new Date(pageData.lastUpdated).toISOString()
+        : undefined
+
+      if (description) pageData.description = description
+
+      const course = {
+        '@type': 'Course',
+        name: 'OCPP Handbook',
+        url: hostname,
+      }
+
+      const schema = isHome
+        ? {
+            '@context': 'https://schema.org',
+            ...course,
+            description: siteDescription,
+            inLanguage: 'en',
+            isAccessibleForFree: true,
+            license,
+            author,
+            provider: author,
+            about: [
+              'Open Charge Point Protocol',
+              'Electric vehicle charging',
+              'ISO 15118',
+              'EV charging infrastructure',
+            ],
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'online',
+              instructor: author,
+            },
+          }
+        : {
+            '@context': 'https://schema.org',
+            '@type': 'LearningResource',
+            name: pageData.title,
+            description,
+            url,
+            inLanguage: 'en',
+            isAccessibleForFree: true,
+            license,
+            author,
+            learningResourceType:
+              slug === 'glossary' ? 'Glossary' : 'Course module',
+            isPartOf: course,
+            ...(modified ? { dateModified: modified } : {}),
+          }
+
+      const breadcrumb = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'OCPP Handbook', item: hostname },
+          ...(isHome
+            ? []
+            : [{ '@type': 'ListItem', position: 2, name: pageData.title, item: url }]),
+        ],
+      }
+
+      const title = isHome ? 'OCPP Handbook' : `${pageData.title} | OCPP Handbook`
+
       pageData.frontmatter.head ??= []
       pageData.frontmatter.head.push(
-        ['link', { rel: 'canonical', href: `${hostname}${path}` }],
-        ['meta', { property: 'og:url', content: `${hostname}${path}` }]
+        ['link', { rel: 'canonical', href: url }],
+        ['meta', { property: 'og:url', content: url }],
+        ['meta', { property: 'og:title', content: title }],
+        ...(description
+          ? ([['meta', { property: 'og:description', content: description }]] as any)
+          : []),
+        ['script', { type: 'application/ld+json' }, JSON.stringify(schema)],
+        ['script', { type: 'application/ld+json' }, JSON.stringify(breadcrumb)]
       )
     },
   })

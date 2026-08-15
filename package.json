@@ -5,7 +5,9 @@
   "description": "A course on EV charging software: the industry, the hardware, the protocols, and the craft of debugging them.",
   "license": "CC-BY-4.0",
   "scripts": {
-    "dev": "vitepress dev",
+    "dev": "npm run llms && vitepress dev",
+    "llms": "node scripts/build-llms.mjs",
+    "prebuild": "npm run llms",
     "build": "vitepress build",
     "preview": "vitepress preview"
   },
