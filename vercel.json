@@ -4,5 +4,17 @@
   "outputDirectory": ".vitepress/dist",
   "framework": null,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/googlebcc71fe85fad186a.html",
+      "destination": "/google-site-verification.txt"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/googlebcc71fe85fad186a.html",
+      "headers": [{ "key": "content-type", "value": "text/html; charset=utf-8" }]
+    }
+  ]
 }
