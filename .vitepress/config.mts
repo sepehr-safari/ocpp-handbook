@@ -7,13 +7,21 @@ const modules = (part: string, entries: [string, string][]) => ({
   items: entries.map(([text, link]) => ({ text, link })),
 })
 
+// GitHub Pages serves the site from a repository subpath; Vercel serves it from
+// the domain root. Getting this wrong 404s every asset, so it follows the host.
+const onVercel = !!process.env.VERCEL
+const base = onVercel ? '/' : '/ocpp-handbook/'
+const hostname = onVercel
+  ? 'https://ocpp-handbook.vercel.app/'
+  : 'https://sepehr-safari.github.io/ocpp-handbook/'
+
 export default withMermaid(
   defineConfig({
     title: 'OCPP Handbook',
     description:
       'A course on EV charging software: the industry, the hardware, the protocols, and the craft of debugging them.',
     lang: 'en-US',
-    base: '/ocpp-handbook/',
+    base,
     cleanUrls: true,
     lastUpdated: true,
     ignoreDeadLinks: false,
@@ -110,6 +118,6 @@ export default withMermaid(
       },
     },
 
-    sitemap: { hostname: 'https://sepehr-safari.github.io/ocpp-handbook/' },
+    sitemap: { hostname },
   })
 )

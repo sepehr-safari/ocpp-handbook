@@ -83,6 +83,7 @@ jobs:
           # --dpi matches the 3x scale the diagrams are rendered at, so images
           # keep their intended size instead of being blown up to full width.
           pandoc "${common[@]}" --pdf-engine=xelatex --dpi=288 \
+            --include-in-header=scripts/preamble.tex \
             -o "ocpp-handbook-${LABEL}.pdf"
           pandoc "${common[@]}" -o "ocpp-handbook-${LABEL}.epub"
 

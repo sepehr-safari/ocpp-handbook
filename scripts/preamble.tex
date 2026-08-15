@@ -1,0 +1,19 @@
+% Page-breaking rules for the PDF edition.
+%
+% LaTeX's defaults happily strand a paragraph's last line at the top of an
+% otherwise empty page, or leave a heading alone at the foot of one. These
+% penalties forbid both, and \raggedbottom lets a page simply end short
+% instead of stretching the vertical space to justify a ragged bottom.
+
+% Never split a single line of a paragraph away from the rest, in either
+% direction: no lone last line on a new page, no lone first line at the foot.
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+% Never leave a heading at the bottom of a page with its text overleaf.
+% The starred option also moves headings that land just above the bottom margin.
+\usepackage[nobottomtitles*]{titlesec}
+
+% Prefer a page that ends short over one padded with stretched spacing.
+\raggedbottom
