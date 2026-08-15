@@ -17,3 +17,14 @@
 
 % Prefer a page that ends short over one padded with stretched spacing.
 \raggedbottom
+
+% Widow and orphan penalties do not govern bulleted lists, which is how a lone
+% final bullet ends up stranded at the top of an otherwise blank page. These
+% are LaTeX internals, hence \makeatletter. The values discourage a break
+% before, inside, and after a list strongly, without forbidding it outright:
+% a genuinely long list must still be allowed to span two pages.
+\makeatletter
+\@beginparpenalty=9000
+\@itempenalty=9000
+\@endparpenalty=9000
+\makeatother
