@@ -29,6 +29,16 @@ export default withMermaid(
 
     head: [
       ['meta', { name: 'author', content: 'Sepehr Safari' }],
+      // Google Search Console ownership. The meta tag rather than the HTML file,
+      // because cleanUrls redirects every .html path and a redirected
+      // verification file is not reliably accepted.
+      [
+        'meta',
+        {
+          name: 'google-site-verification',
+          content: '56lpPThVBor7WPbqKjaifjr4Zo9X0AN40PwGzAg6yt4',
+        },
+      ],
       ['meta', { property: 'og:type', content: 'website' }],
       ['meta', { property: 'og:title', content: 'OCPP Handbook' }],
       [
