@@ -7,13 +7,8 @@ const modules = (part: string, entries: [string, string][]) => ({
   items: entries.map(([text, link]) => ({ text, link })),
 })
 
-// GitHub Pages serves the site from a repository subpath; Vercel serves it from
-// the domain root. Getting this wrong 404s every asset, so it follows the host.
-const onVercel = !!process.env.VERCEL
-const base = onVercel ? '/' : '/ocpp-handbook/'
-const hostname = onVercel
-  ? 'https://ocpp-handbook.vercel.app/'
-  : 'https://sepehr-safari.github.io/ocpp-handbook/'
+// Vercel is the canonical host, serving from the domain root.
+const hostname = 'https://ocpp-handbook.vercel.app/'
 
 export default withMermaid(
   defineConfig({
@@ -21,7 +16,7 @@ export default withMermaid(
     description:
       'A course on EV charging software: the industry, the hardware, the protocols, and the craft of debugging them.',
     lang: 'en-US',
-    base,
+    base: '/',
     cleanUrls: true,
     lastUpdated: true,
     ignoreDeadLinks: false,
@@ -123,5 +118,18 @@ export default withMermaid(
     },
 
     sitemap: { hostname },
+
+    // One canonical URL per page, so the same content served from anywhere else
+    // points search engines back here.
+    transformPageData(pageData) {
+      const path = pageData.relativePath
+        .replace(/(^|\/)index\.md$/, '$1')
+        .replace(/\.md$/, '')
+      pageData.frontmatter.head ??= []
+      pageData.frontmatter.head.push(
+        ['link', { rel: 'canonical', href: `${hostname}${path}` }],
+        ['meta', { property: 'og:url', content: `${hostname}${path}` }]
+      )
+    },
   })
 )
