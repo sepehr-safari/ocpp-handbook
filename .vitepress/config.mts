@@ -53,6 +53,10 @@ export default withMermaid(
         { text: 'Start reading', link: '/modules/00-orientation' },
         { text: 'Glossary', link: '/glossary' },
         {
+          text: 'Download',
+          link: 'https://github.com/sepehr-safari/ocpp-handbook/releases',
+        },
+        {
           text: 'Parts',
           items: [
             { text: 'I. The industry', link: '/modules/01-the-industry' },

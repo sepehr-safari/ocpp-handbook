@@ -48,6 +48,10 @@ All modules are available, from orientation through the capstone.
 | V. Mastery | 17 | [Capstone: end to end with open tools](modules/17-capstone.md) | Available |
 | Appendix | | [Glossary](GLOSSARY.md) | Growing |
 
+## Read it offline
+
+PDF and EPUB editions are attached to each [release](https://github.com/sepehr-safari/ocpp-handbook/releases). A published edition stays as it was published; corrections land in the next one.
+
 ## Scope and conventions
 
 OCPP 1.6J is the working baseline because it's what the field mostly runs. OCPP 2.0.1 gets a deep module of its own, and 2.1 is covered where it changes the picture. Terminology defaults, citation rules, and how to get the specifications are in [Module 0](modules/00-orientation.md).
