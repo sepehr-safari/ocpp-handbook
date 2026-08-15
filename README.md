@@ -58,6 +58,6 @@ Everything hands-on uses open-source software, and no charger hardware is needed
 
 ## License and feedback
 
-Prose is licensed under [CC BY 4.0](LICENSE); code samples are licensed under [Apache 2.0](LICENSE-CODE). Corrections and error reports are welcome as issues.
+Prose is licensed under [CC BY 4.0](https://github.com/sepehr-safari/ocpp-handbook/blob/main/LICENSE); code samples are licensed under [Apache 2.0](https://github.com/sepehr-safari/ocpp-handbook/blob/main/LICENSE-CODE). Corrections and error reports are welcome as issues.
 
 Written by Sepehr Safari.
