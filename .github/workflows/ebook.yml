@@ -1,0 +1,129 @@
+name: Build ebook
+
+# Editions are tagged, not continuous: a published version stays fixed, the way
+# the handbook's own modules describe specification editions. Use the manual
+# trigger for a dry run that builds the files without publishing a release.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version label for a dry-run build (no release is published)'
+        required: false
+        default: 'dev'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Resolve the version label
+        id: version
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "label=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "label=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli@11.4.2
+
+      - name: Locate a browser for mermaid
+        id: browser
+        run: |
+          for candidate in google-chrome google-chrome-stable chromium chromium-browser; do
+            if command -v "$candidate" >/dev/null 2>&1; then
+              echo "path=$(command -v $candidate)" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "No Chrome or Chromium found on the runner; mermaid cannot render." >&2
+          exit 1
+
+      - name: Assemble the book and render diagrams
+        env:
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.browser.outputs.path }}
+          PUPPETEER_CONFIG_FILE: puppeteer.json
+        run: |
+          echo '{"args":["--no-sandbox","--disable-dev-shm-usage"]}' > puppeteer.json
+          node scripts/build-book.mjs --version "${{ steps.version.outputs.label }}"
+
+      - name: Install pandoc and a LaTeX engine
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            fonts-dejavu \
+            poppler-utils
+
+      - name: Render PDF and EPUB
+        env:
+          LABEL: ${{ steps.version.outputs.label }}
+        run: |
+          set -euo pipefail
+          common=(build/book.md --from=markdown --toc --toc-depth=2
+                  --top-level-division=chapter --resource-path=build)
+          # --dpi matches the 3x scale the diagrams are rendered at, so images
+          # keep their intended size instead of being blown up to full width.
+          pandoc "${common[@]}" --pdf-engine=xelatex --dpi=288 \
+            -o "ocpp-handbook-${LABEL}.pdf"
+          pandoc "${common[@]}" -o "ocpp-handbook-${LABEL}.epub"
+
+      - name: Check the artifacts are whole
+        env:
+          LABEL: ${{ steps.version.outputs.label }}
+        run: |
+          set -euo pipefail
+          pages=$(pdfinfo "ocpp-handbook-${LABEL}.pdf" | awk '/^Pages:/ {print $2}')
+          echo "PDF pages: $pages"
+          # A silently truncated book is worse than a failed build.
+          if [ "$pages" -lt 80 ]; then
+            echo "PDF has only $pages pages; expected the full handbook." >&2
+            exit 1
+          fi
+          images=$(pdfimages -list "ocpp-handbook-${LABEL}.pdf" | tail -n +3 | wc -l)
+          echo "PDF embedded images: $images"
+          if [ "$images" -lt 16 ]; then
+            echo "PDF carries $images images; expected all 16 diagrams." >&2
+            exit 1
+          fi
+          ls -lh "ocpp-handbook-${LABEL}.pdf" "ocpp-handbook-${LABEL}.epub"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ocpp-handbook-${{ steps.version.outputs.label }}
+          path: |
+            ocpp-handbook-*.pdf
+            ocpp-handbook-*.epub
+
+      - name: Publish the release
+        if: steps.version.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LABEL: ${{ steps.version.outputs.label }}
+        run: |
+          set -euo pipefail
+          files=("ocpp-handbook-${LABEL}.pdf" "ocpp-handbook-${LABEL}.epub")
+          if gh release view "$LABEL" >/dev/null 2>&1; then
+            gh release upload "$LABEL" "${files[@]}" --clobber
+          else
+            gh release create "$LABEL" "${files[@]}" \
+              --title "OCPP Handbook $LABEL" \
+              --notes "PDF and EPUB editions of the OCPP Handbook, built from the modules in this repository at $LABEL. Prose is licensed CC BY 4.0; code samples are Apache 2.0."
+          fi

@@ -2,3 +2,7 @@
 node_modules/
 .vitepress/dist/
 .vitepress/cache/
+build/
+ocpp-handbook-*.pdf
+ocpp-handbook-*.epub
+puppeteer.json
