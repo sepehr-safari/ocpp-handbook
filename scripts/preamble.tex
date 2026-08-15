@@ -28,3 +28,10 @@
 \@itempenalty=9000
 \@endparpenalty=9000
 \makeatother
+
+% This book is full of bulleted lists. Tightening them slightly is both better
+% typography for a reference text and fewer lists that overflow a page by a
+% single item, which is the case penalties alone cannot solve on a full page.
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=2pt, parsep=0pt, topsep=4pt}
+\setlist[enumerate]{itemsep=2pt, parsep=0pt, topsep=4pt}
